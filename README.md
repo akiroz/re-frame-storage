@@ -16,11 +16,12 @@ There are 2 ways to use this:
 ### 1. As individual re-frame fx & cofx
 
 ```clojure
-(require '[akiroz.re-frame-storage :refer [reg-co-fx!]])
+(ns my-app
+  (:require [akiroz.re-frame.storage :refer [reg-co-fx!]]))
 
 ;; both :fx and :cofx keys are optional, they will not be registered if unspecified.
-(reg-co-fx! {:key :my-app   ;; local storage key
-             :fx :store     ;; re-frame fx ID
+(reg-co-fx! :my-app         ;; local storage key
+            {:fx :store     ;; re-frame fx ID
              :cofx :store}) ;; re-frame cofx ID
 
 ;; ...
@@ -37,7 +38,8 @@ There are 2 ways to use this:
 ### 2. As a re-frame interceptor that automatically persists part of your app-db
 
 ```clojure
-(require '[akiroz.re-frame-storage :refer [persist-db]])
+(ns my-app
+  (:require [akiroz.re-frame.storage :refer [persist-db]]))
 
 ;; define a custum reg-event-db
 ;; local storage key is :my-app
