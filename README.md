@@ -1,6 +1,8 @@
 # re-frame-storage
 
-
+[![Clojars Project](https://img.shields.io/clojars/v/akiroz.re-frame/storage.svg)](https://clojars.org/akiroz.re-frame/storage)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/akiroz/re-frame-storage/master/LICENSE)
+[![Build Status](https://travis-ci.org/akiroz/re-frame-storage.svg?branch=master)](https://travis-ci.org/akiroz/re-frame-storage)
 
 A very simple re-frame wrapper around [storage-atom][storage-atom] for persisting app state.
 
