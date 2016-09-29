@@ -1,13 +1,11 @@
 # re-frame-storage
 
+
+
 A very simple re-frame wrapper around [storage-atom][storage-atom] for persisting app state.
 
-## Dependency
+Depends on `re-frame >= 0.8.0`. 
 
-Add the following to your dependency vector:
-
-
-Also depends on `re-frame >= 0.8.0`. 
 
 ## Usage
 
