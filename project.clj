@@ -1,4 +1,4 @@
-(defproject akiroz.re-frame/storage "0.1.0"
+(defproject akiroz.re-frame/storage "0.1.1"
   :description "re-frame interceptors for browser local storage"
   :url "https://github.com/akiroz/re-frame-storage"
   :license {:name "MIT"
@@ -7,7 +7,8 @@
   :dependencies [[alandipert/storage-atom "2.0.1"]]
 
   :profiles {:test {:plugins [[lein-cljsbuild "1.1.4"]
-                              [lein-doo "0.1.7"]]
+                              [lein-doo "0.1.7"]
+                              ]
                     :dependencies [[org.clojure/clojure "1.8.0"]
                                    [org.clojure/clojurescript "1.9.229"]
                                    [org.clojure/core.async "0.2.391"]
