@@ -29,7 +29,7 @@ There are 2 ways to use this:
 (reg-event-fx
   :read-foo-store-bar
   [(inject-cofx :store)]
-  (fn [{keys [store]} _]
+  (fn [{:keys [store]} _]
     (print (:foo store))
     {:store (assoc store :bar "qux")}))
 
