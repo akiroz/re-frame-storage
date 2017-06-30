@@ -1,7 +1,7 @@
 (ns akiroz.re-frame.storage
   (:require [re-frame.core :refer [reg-fx reg-cofx ->interceptor]]
             [alandipert.storage-atom :refer [local-storage]]
-            [cljs.spec :as s]
+            [cljs.spec.alpha :as s]
             ))
 
 (s/def ::cljs-data
