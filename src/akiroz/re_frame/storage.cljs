@@ -88,3 +88,20 @@
                :db-key keyword?))
 
 
+(defn persist-db-keys [store-key db-keys]
+  (register-store store-key)
+  (->interceptor
+    :id (keyword (str (apply str (sort db-keys)) "->" store-key))
+    :before (fn [context]
+              (update-in context [:coeffects :db] merge (<-store store-key)))
+    :after (fn [context]
+             (when-let [value (some-> (get-in context [:effects :db])
+                                      (select-keys db-keys))]
+               (->store store-key value))
+             context)))
+
+(s/fdef persist-db-keys
+  :args (s/cat :store-key keyword?
+               :db-keys (s/coll-of keyword?)))
+
+

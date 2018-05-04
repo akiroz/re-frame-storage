@@ -60,6 +60,16 @@ There are 2 ways to use this:
     (print (get-in db [:persistant :foo]))
     (assoc-in db [:persistant :bar] "qux")))
 
+;; Or, if you want to persist multiple DB keys:
+
+(defn my-reg-event-db
+  [event-id handler]
+  (reg-event-fx
+    event-id
+    [(persist-db-keys :my-app [:persistent-1 :persistent-2])]
+    (fn [{:keys [db]} event-vec]
+      {:db (handler db event-vec)})))
+
 ```
 
 [storage-atom]: https://github.com/alandipert/storage-atom
