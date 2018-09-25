@@ -3,7 +3,7 @@
   (:require [cljs.core.async :refer [chan <! put!]]
             [cljs.test :refer-macros [deftest is async]]
             [re-frame.core :refer [dispatch reg-event-fx inject-cofx trim-v]]
-            [akiroz.re-frame.storage :refer [reg-co-fx! persist-db]]
+            [akiroz.re-frame.storage :as storage :refer [reg-co-fx! persist-db]]
             ))
 
 (deftest fx-cofx-test
@@ -50,5 +50,32 @@
              (is (= (<! probe-chan) {:q "qux" :p "hello"}))
              (is (= (<! probe-chan) {:q "qux" :p [:a :b :c]}))
              (is (= (<! probe-chan) {:q "qux" :p {:d 4 :e 5}}))
+             (done)))))
+
+(deftest persist-db-keys-test
+  (let [probe-chan (chan)
+        check-storage #(storage/<-store :db-test-key-multi)]
+    (reg-event-fx
+      :persist-db-keys-test
+      [trim-v (storage/persist-db-keys :db-test-key-multi [:p :q])]
+      (fn [{:keys [db]} [x y]]
+        (put! probe-chan [db (storage/<-store :db-test-key-multi)])
+        {:db (assoc db :p x :q y :r "qux")}))
+    (dispatch [:persist-db-keys-test 1 2])
+    (dispatch [:persist-db-keys-test "hello" :test])
+    (dispatch [:persist-db-keys-test [:a :b :c] 3])
+    (dispatch [:persist-db-keys-test {:d 4 :e 5} "hi"])
+    (dispatch [:persist-db-keys-test nil nil])
+    (async done
+           (go
+             (<! probe-chan)
+             (is (= (<! probe-chan) [{:r "qux" :p 1 :q 2}
+                                     {:p 1 :q 2}]))
+             (is (= (<! probe-chan) [{:r "qux" :p "hello" :q :test}
+                                     {:p "hello" :q :test}]))
+             (is (= (<! probe-chan) [{:r "qux" :p [:a :b :c] :q 3}
+                                     {:p [:a :b :c] :q 3}]))
+             (is (= (<! probe-chan) [{:r "qux" :p {:d 4 :e 5} :q "hi"}
+                                     {:p {:d 4 :e 5} :q "hi"}]))
              (done)))))
 
