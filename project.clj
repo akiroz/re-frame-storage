@@ -1,4 +1,4 @@
-(defproject akiroz.re-frame/storage "0.1.2"
+(defproject akiroz.re-frame/storage "0.1.3"
   :description "re-frame interceptors for browser local storage"
   :url "https://github.com/akiroz/re-frame-storage"
   :license {:name "MIT"
