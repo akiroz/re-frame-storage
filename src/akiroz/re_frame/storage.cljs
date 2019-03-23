@@ -68,7 +68,7 @@
 (s/def ::cofx keyword?)
 (s/fdef reg-co-fx!
   :args (s/cat :store-key keyword?
-               :handlers (s/keys :req [(or ::fx ::cofx)])))
+               :handlers (s/keys :req-un [(or ::fx ::cofx)])))
 
 
 (defn persist-db [store-key db-key]
