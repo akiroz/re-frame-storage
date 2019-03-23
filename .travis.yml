@@ -1,3 +1,12 @@
 language: clojure
 lein: 2.6.1
-script: lein with-profile test doo phantom test once
+
+addons:
+  firefox: "64.0"
+
+cache:
+    - npm
+    - directories:
+        - ~/.m2
+
+script: lein with-profile test doo firefox-headless test once

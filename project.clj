@@ -15,11 +15,17 @@
                                    [re-frame "0.10.6"]
                                    [reagent "0.8.1"]
                                    ]
+                    :doo {:paths {:karma "./node_modules/karma/bin/karma"}}
                     :cljsbuild {:builds [{:id "test"
                                           :source-paths ["src" "test"]
                                           :compiler {:output-dir "target/js/out"
                                                      :output-to "target/js/testable.js"
                                                      :main akiroz.re-frame.storage-runner
-                                                     :optimizations :whitespace}}]}}}
+                                                     :optimizations :whitespace
+                                                     :npm-deps {:karma "4.0.1"
+                                                                :karma-cljs-test "0.1.0"
+                                                                :karma-firefox-launcher "1.1.0"}
+                                                     :install-deps true
+                                                     }}]}}}
 
   )
