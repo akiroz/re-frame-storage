@@ -6,7 +6,7 @@
 
 A very simple re-frame wrapper around [storage-atom][storage-atom] for persisting app state.
 
-Depends on `re-frame >= 0.8.0`. 
+Depends on `re-frame >= 0.8.0`.
 
 
 ## Usage
@@ -43,12 +43,12 @@ There are 2 ways to use this:
 
 ;; define a custum reg-event-db
 ;; local storage key is :my-app
-;; everything inside the db's :persistant key is automatically stored and retreived.
+;; everything inside the db's :persistent key is automatically stored and retreived.
 (defn my-reg-event-db
   [event-id handler]
   (reg-event-fx
     event-id
-    [(persist-db :my-app :persistant)]
+    [(persist-db :my-app :persistent)]
     (fn [{:keys [db]} event-vec]
       {:db (handler db event-vec)})))
 
@@ -57,8 +57,8 @@ There are 2 ways to use this:
 (my-reg-event-db
   :read-foo-store-bar
   (fn [db _]
-    (print (get-in db [:persistant :foo]))
-    (assoc-in db [:persistant :bar] "qux")))
+    (print (get-in db [:persistent :foo]))
+    (assoc-in db [:persistent :bar] "qux")))
 
 ;; Or, if you want to persist multiple DB keys:
 
@@ -69,6 +69,10 @@ There are 2 ways to use this:
     [(persist-db-keys :my-app [:persistent-1 :persistent-2])]
     (fn [{:keys [db]} event-vec]
       {:db (handler db event-vec)})))
+
+;; May want an init helper to dispatch on app init
+
+(my-reg-event-db :init (fn [db] db))
 
 ```
 
