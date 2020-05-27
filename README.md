@@ -70,6 +70,10 @@ There are 2 ways to use this:
     (fn [{:keys [db]} event-vec]
       {:db (handler db event-vec)})))
 
+;; May want an init helper to dispatch on app init
+
+(my-reg-event-db :init (fn [db] db))
+
 ```
 
 [storage-atom]: https://github.com/alandipert/storage-atom
