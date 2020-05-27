@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@cljs-oss/module-deps": "^1.1.1",
-    "karma": "^4.0.1",
+    "karma": "^5.0.9",
     "karma-cljs-test": "^0.1.0",
     "karma-firefox-launcher": "^1.1.0"
   }
