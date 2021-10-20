@@ -41,7 +41,7 @@ There are 2 ways to use this:
 (ns my-app
   (:require [akiroz.re-frame.storage :refer [persist-db]]))
 
-;; define a custum reg-event-db
+;; define a custom reg-event-db
 ;; local storage key is :my-app
 ;; everything inside the db's :persistent key is automatically stored and retreived.
 (defn my-reg-event-db
